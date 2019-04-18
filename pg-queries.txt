@@ -1,0 +1,19 @@
+CREATE TABLE books (
+    id serial NOT NULL,
+    book_name character varying(100) NOT NULL,
+    book_cover character varying(50),
+    book_author_name character varying(50) NOT NULL,
+    book_details character varying(500) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE users (
+    id serial NOT NULL,
+    user_first_name character varying(50) NOT NULL,
+    user_last_name character varying(50) NOT NULL,
+    user_phone_number character varying(15),
+    user_email character varying(60) NOT NULL,
+    user_password character varying(128),
+    user_google_id character varying(100),
+    PRIMARY KEY (id)
+);

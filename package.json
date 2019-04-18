@@ -1,25 +1,61 @@
 {
-  "name": "simple-login-react-hooks",
+  "name": "bulma-login-react-hooks",
   "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "react": "^16.8.4",
-    "react-dom": "^16.8.4",
-    "react-scripts": "2.1.8"
-  },
+  "description": "login with bulma and react hooks",
+  "main": "index.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "server": "cross-env nodemon NODE_ENV=prod server",
+    "client": "cross-env yarn --cwd client start",
+    "dev": "concurrently \"yarn server\" \"yarn client\"",
+    "test": "cross-env NODE_ENV=test mocha --timeout 5000 __tests__/server/**/*.test.js",
+    "report": "cross-env NODE_ENV=test nyc --reporter=lcov mocha --timeout 5000 __tests__/server/**/*.test.js",
+    "text-report": "cross-env NODE_ENV=test nyc --reporter=text-summary mocha --timeout 5000 __tests__/server/**/*.test.js",
+    "nyc": "cross-env NODE_ENV=test nyc mocha --timeout 5000 __tests__/server/**/*.test.js"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "author": "James Lee",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.17.2",
+    "concurrently": "^4.1.0",
+    "connect-flash": "^0.1.1",
+    "cors": "^2.8.5",
+    "cross-env": "^5.0.5",
+    "dotenv": "^7.0.0",
+    "express": "^4.15.3",
+    "express-promise-router": "^3.0.3",
+    "express-session": "^1.15.6",
+    "joi": "^14.3.1",
+    "jsonwebtoken": "^8.5.1",
+    "passport": "^0.4.0",
+    "passport-facebook-token": "^3.3.0",
+    "passport-google-plus-token": "^2.1.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
+    "pg": "^7.9.0"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^4.2.1",
+    "faker": "^4.1.0",
+    "mocha": "^6.0.2",
+    "nodemon": "^1.11.0",
+    "nyc": "^13.3.0",
+    "sinon": "^7.3.0",
+    "sinon-chai": "^3.3.0"
+  },
+  "nyc": {
+    "exclude": [
+      "server/app.js",
+      "server/configuration/index.js",
+      "server/passport.js",
+      "server/models/**/*.js",
+      "server/helpers/**/*.js",
+      "__tests__",
+      "node_modules"
+    ],
+    "cache": false,
+    "report-dir": "./__tests__/report"
+  }
 }
